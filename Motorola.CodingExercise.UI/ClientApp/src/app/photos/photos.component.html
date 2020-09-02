@@ -1,0 +1,22 @@
+<h1 id="tableLabel">Mars Rover Photos</h1>
+
+<p>This component gets Mars Rover Photos from the server.</p>
+
+<p *ngIf="!photos"><em>Loading...</em></p>
+
+<table class='table table-striped' aria-labelledby="tableLabel" *ngIf="photos">
+  <thead>
+    <tr>     
+      <th>Earth Date</th>
+      <th>Id</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let photo of photos">
+      <td>{{ photo.earth_date }}</td>
+      <td>{{ photo.id }}</td>
+      <td><img [attr.src]="photo.img_src" width="75" height="75"></td>
+    </tr>
+  </tbody>
+</table>
