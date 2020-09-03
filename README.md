@@ -5,6 +5,13 @@ Motorola Coding exercise:
 -------------------------------------------
 Coding exercise for Motorola technical screening.
 
+Prerequisites:
+--------------
+Please make sure below softwares are installed
+VS 2019 With ASP.NET Core
+NPM and Node
+Docker Desktop
+
 Projects:
 --------
 Motorola.CodingExercise.Repository
@@ -45,7 +52,7 @@ ASP.Net Core Angular Application.
 Calls API from "Motorola.CodingExercise.Service", get the Mars Rover Photos and displays them in tabular
 format with columns - Earth date, Photo Id and actual image on page load.
 
-Note: Make sure "Motorola.CodingExercise.Service" and "Motorola.CodingExercise.UI" are set as 
+Note**: Make sure "Motorola.CodingExercise.Service" and "Motorola.CodingExercise.UI" are set as 
 StartUp Projects. To consume API from Angular application, the service has to be up and running.
 
 	
