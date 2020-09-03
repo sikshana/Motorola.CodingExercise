@@ -14,7 +14,7 @@ namespace Motoroal.CodingExercise.Repository.Repos
             try
             {
                UriBuilder builder = new UriBuilder("https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos");
-                builder.Query = $"earth_date={strEarthDate}&api_key={Constants.DemoAPIKey}";
+                builder.Query = $"earth_date={strEarthDate}&api_key={Constants.APIKey}";
 
                 using (var httpClient = new HttpClient())
                 {
@@ -32,7 +32,7 @@ namespace Motoroal.CodingExercise.Repository.Repos
                     }
                     else
                     {
-                        throw new Exception($"#GetMarsRoverPhotosByDate :: NASA API to get Mars Photos is not success for Earh Date: {strEarthDate}");
+                        throw new Exception($"#GetMarsRoverPhotosByDate :: NASA API to get Mars Photos is not success for Earh Date: {strEarthDate}. Response Message: {httpResponseMessage.ToString()} ");
                     }
                     return new List<MarsRoverPhoto>();
                 }                

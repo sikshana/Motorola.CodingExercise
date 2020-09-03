@@ -30,6 +30,7 @@ namespace Motorola.CodingExercise.Service
                     });
             });
 
+            ///[SA] - TODO - add services to load by assembly using Autofac
             services.AddScoped<IMarsRoverPhotoRepo, MarsRoverPhotoRepo>();
             services.AddControllers();
             services.AddSwaggerGen();

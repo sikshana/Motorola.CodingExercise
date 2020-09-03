@@ -9,7 +9,7 @@ export function getBaseUrl() {
 }
 
 export function getBaseUrlForMarsRoverPhotoService() {
-  return "https://localhost:44346/";
+  return "https://localhost:44360/";
 }
 
 

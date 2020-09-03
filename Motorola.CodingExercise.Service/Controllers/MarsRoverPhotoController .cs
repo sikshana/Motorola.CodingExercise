@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Cors;
@@ -38,7 +39,7 @@ namespace Motorola.CodingExercise.Service.Controllers
             {
                 var marsRoverPhotos = new List<MarsRoverPhoto>();
 
-                string path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources\dates.txt");
+                string path = Path.Combine(Directory.GetCurrentDirectory(), @"Resources/dates.txt");
 
                 StreamReader file = new StreamReader(path);
                 string line;
@@ -52,8 +53,12 @@ namespace Motorola.CodingExercise.Service.Controllers
                         {
                             string strEarthDate = earthDate.ToString("yyyy-MM-dd");
                             var photos = await _marsRoverPhotoRepo.GetMarsRoverPhotosByDate(strEarthDate);
-                            marsRoverPhotos.AddRange(photos);
-                            await DownloadFiles(strEarthDate, photos);
+
+                            if (photos.Any())
+                            {
+                                marsRoverPhotos.AddRange(photos);
+                                await DownloadFiles(strEarthDate, photos);
+                            }                            
                         }                        
                     }
                 }                
@@ -69,7 +74,7 @@ namespace Motorola.CodingExercise.Service.Controllers
         private async Task DownloadFiles(string earthDate, List<MarsRoverPhoto> photos)
         {
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), $@"Downloads\{earthDate}");
+            string path = Path.Combine(Directory.GetCurrentDirectory(), $@"Downloads/{earthDate}");
             if (!Directory.Exists(path))
             {
                 Directory.CreateDirectory(path);                            
@@ -79,7 +84,7 @@ namespace Motorola.CodingExercise.Service.Controllers
             {
                 using (WebClient webClient = new WebClient())
                 {
-                    string imgFilePath = Path.Combine(Directory.GetCurrentDirectory(), $@"Downloads\{earthDate}\{photo.id.ToString()}.JPG");
+                    string imgFilePath = Path.Combine(Directory.GetCurrentDirectory(), $@"Downloads/{earthDate}/{photo.id.ToString()}.JPG");
                     if (!System.IO.File.Exists(imgFilePath))
                     {
                         await Task.Run(() => { webClient.DownloadFileAsync(new Uri(photo.img_src), imgFilePath); });
